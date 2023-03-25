@@ -26,7 +26,7 @@ backupId=${backupResultData[1]};
 
 log "Database backup succeeded (ID: $backupId)!";
 
-backupDate=$(date +"%Y-%m-%d_%H-%m");
+backupDate=$(date +"%Y-%m-%d_%H-%M");
 fileName="matomo-db_$backupDate.sql.gz"
 
 log "Downloading backup $backupId to $fileName...";
