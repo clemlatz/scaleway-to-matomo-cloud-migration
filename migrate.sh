@@ -54,3 +54,9 @@ lftp \
     -e "ls -h; bye" \
     -u $ftpUsername,$ftpPassword \
     ftp-innocraft-customer-uploads.alwaysdata.net;
+
+log "Deleting local database dump…";
+
+rm $fileName;
+
+log "Local database dump deleted";
