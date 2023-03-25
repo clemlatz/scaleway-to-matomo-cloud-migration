@@ -26,6 +26,12 @@ backupId=${backupResultData[1]};
 
 log "Database backup succeeded (ID: $backupId)!";
 
+log "Preparing backup for export…";
+
+scw rdb backup export --wait $backupId >/dev/null;
+
+log "Backup ready for export!";
+
 backupDate=$(date +"%Y-%m-%d_%H-%M");
 fileName="matomo-db_$backupDate.sql.gz"
 
