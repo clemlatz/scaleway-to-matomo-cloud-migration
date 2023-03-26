@@ -13,6 +13,13 @@ function log () {
   echo "$currentDate | $1";
 }
 
+function ftp () {
+  lftp \
+    -e "$1; bye" \
+    -u $ftpUsername,$ftpPassword \
+    ftp-innocraft-customer-uploads.alwaysdata.net;
+}
+
 log "Initiating $databaseName database transfer…";
 
 log "Creating $databaseName database backup…";
@@ -43,17 +50,11 @@ log "Download succeeded!";
 
 log "Uploading backup to FTP server…";
 
-lftp \
-    -e "put -O . $fileName; bye" \
-    -u $ftpUsername,$ftpPassword \
-    ftp-innocraft-customer-uploads.alwaysdata.net;
+ftp "put -O . $fileName";
 
 log "Database transfer succeeded!";
 
-lftp \
-    -e "ls -h; bye" \
-    -u $ftpUsername,$ftpPassword \
-    ftp-innocraft-customer-uploads.alwaysdata.net;
+ftp "ls -h";
 
 log "Deleting local database dump…";
 
