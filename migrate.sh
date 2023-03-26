@@ -48,6 +48,10 @@ scw rdb backup download $backupId output=$fileName;
 
 log "Download succeeded!";
 
+log "Moving previous backups to previous folder…";
+
+ftp "mmv ./matomo* previous/";
+
 log "Uploading backup to FTP server…";
 
 ftp "put -O . $fileName";
@@ -55,6 +59,10 @@ ftp "put -O . $fileName";
 log "Database transfer succeeded!";
 
 ftp "ls -h";
+
+log "Deleting previous backups from remote…";
+
+ftp "glob -a rm previous/*";
 
 log "Deleting local database dump…";
 
